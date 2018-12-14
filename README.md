@@ -18,3 +18,27 @@ npm install -S afeiship/es6-emitter --registry=https://registry.npm.taobao.org
 | emit | name,data             | fire an event       |
 | one  | name, handler,context | register only once  |
 | once | name, handler,context | excute only once    |
+
+## usage:
+```js
+import Es6Emitter from 'es6-emitter';
+
+const event = new Es6Emitter();
+
+// register:
+const res = event.on('event1',(_, data)=>{
+  console.log(data)
+});
+
+// emit:
+event.emit('event1',{ name:'xiaoming'});
+
+// off:
+event.destroy();
+
+// one:
+event.one('event-one',()=>{})
+
+// once
+event.once('event-once',()=>{})
+```
