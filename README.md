@@ -34,7 +34,7 @@ const res = event.on('event1',(_, data)=>{
 event.emit('event1',{ name:'xiaoming'});
 
 // off:
-event.destroy();
+event.destroy(); // or use off method(not recomend)
 
 // one:
 event.one('event-one',()=>{})
