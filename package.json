@@ -28,5 +28,8 @@
     "babel-register": "^6.0.0",
     "jest": "^23.6.0",
     "prettier": "^1.15.3"
+  },
+  "dependencies": {
+    "event-emitter": "github:afeiship/event-emitter"
   }
 }
