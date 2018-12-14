@@ -1,6 +1,8 @@
 # es6-emitter
 > Emitter based on es6 for extends.
 
+## resouces:
++ https://github.com/jeromeetienne/microevent.js
 
 ## install:
 ```bash
