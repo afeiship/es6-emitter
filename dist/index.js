@@ -16,15 +16,27 @@ var _default = function () {
   }
 
   _createClass(_default, [{
+    key: "destroy",
+    value: function destroy() {
+      this.__listeners__ = null;
+    }
+  }, {
     key: "on",
     value: function on(inName, inHandler, inContext) {
+      var _this = this;
+
       var map = this.__listeners__;
       var listeners = map[inName] = map[inName] || [];
       listeners.push({
-        owner: this,
+        sender: this,
         handler: inHandler,
         context: inContext
       });
+      return {
+        destroy: function destroy() {
+          _this.off(inName, inHandler, inContext);
+        }
+      };
     }
   }, {
     key: "off",
@@ -50,12 +62,27 @@ var _default = function () {
           var _listeners$index = listeners[index],
               handler = _listeners$index.handler,
               context = _listeners$index.context,
-              owner = _listeners$index.owner;
+              sender = _listeners$index.sender;
 
-          if (handler.call(context || owner, owner, inData) === false) {
+          if (handler.call(context || sender, sender, inData) === false) {
             break;
           }
+          handler.__once__ && this.off(inName, handler, context);
         }
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(inName, inHandler, inContext) {
+      inHandler.__once__ = true;
+      return this.on(inName, inHandler, inContext);
+    }
+  }, {
+    key: "one",
+    value: function one(inName, inHandler, inContext) {
+      var map = this.__listeners__;
+      if (!map[inName]) {
+        return this.on(inName, inHandler, inContext);
       }
     }
   }]);
