@@ -3,7 +3,7 @@ export default class {
     this.__listeners__ = {};
   }
   destroy() {
-    this.__listeners__ = [];
+    this.__listeners__ = null;
   }
   on(inName, inHandler, inContext) {
     const map = this.__listeners__;
@@ -40,23 +40,17 @@ export default class {
         if (handler.call(context || sender, sender, inData) === false) {
           break;
         }
+        handler.__once__ && this.off(inName, handler, context);
       }
     }
   }
   once(inName, inHandler, inContext) {
-    const instance = this.on(
-      inName,
-      (inSender, inData) => {
-        inHandler.call(inContext, inSender, inData);
-        instance.destroy();
-      },
-      inContext
-    );
-    return instance;
+    inHandler.__once__ = true;
+    return this.on(inName, inHandler, inContext);
   }
   one(inName, inHandler, inContext) {
     const map = this.__listeners__;
-    if (!map[inName].length) {
+    if (!map[inName]) {
       return this.on(inName, inHandler, inContext);
     }
   }

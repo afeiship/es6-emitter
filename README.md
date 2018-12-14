@@ -3,6 +3,7 @@
 
 ## resouces:
 + https://github.com/jeromeetienne/microevent.js
++ https://github.com/kutyel/es6-emitter/blob/master/index.js
 
 ## install:
 ```bash
