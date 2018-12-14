@@ -14,7 +14,7 @@ export default class {
       context: inContext
     });
     return {
-      destroy: function() {
+      destroy: () => {
         this.off(inName, inHandler, inContext);
       }
     };
