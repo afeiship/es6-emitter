@@ -1,5 +1,3 @@
-const slice = Array.prototype.slice;
-
 export default class {
   constructor() {
     this.__listeners__ = {};
